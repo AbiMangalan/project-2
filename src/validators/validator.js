@@ -19,7 +19,7 @@ const isValidURL = function (link)
 
 const isValidMobileNo = function (mobile)
 {
-    return (/((\+91)?0?)?[1-9]\d{9}/.test(mobile));
+    return (/((\+91)?0?)?[6-9]\d{9}/.test(mobile));
 };
 
 const isValidEmail = function(email)
