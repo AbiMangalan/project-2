@@ -53,7 +53,7 @@ const listInterns = async function (req,res)
     
             return res.status(400).send({status : false, message : "Invalid request parameter. Please provide collegeName."});
 
-        let college = await collegeModel.findOne({ name : req.query.collegeName, isDeleted : false },{ name : 1, fullName : 1, logoLink : 1 });
+        let college = await collegeModel.findOne({ name : req.query.collegeName.toLowerCase(), isDeleted : false },{ name : 1, fullName : 1, logoLink : 1 });
         if(college === null)
 
             return res.status(404).send({status : false, message : "College not found!"});
