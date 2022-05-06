@@ -44,7 +44,7 @@ const createIntern = async function(req, res)
 
             return res.status(400).send({status : false, message : "Invalid field (isDeleted) in request body."});
 
-        let temp=requestBody.mobile;
+        let temp = requestBody.mobile;
         requestBody.mobile = temp.slice(-10);
         let emailAndMobileExists = await internModel.findOne({ $or : [{ mobile : requestBody.mobile },{ email : requestBody.email }] });
         if(emailAndMobileExists)
@@ -58,8 +58,7 @@ const createIntern = async function(req, res)
         
         requestBody['collegeId']=college._id;
         const createIntern = await internModel.create(requestBody);
-        let { name, email, mobile, collegeId } = createIntern;
-        return res.status(201).send(  {status : true, data : { name, email, mobile, collegeId } });
+        return res.status(201).send(  {status : true, data : createIntern });
     } 
     catch (err) 
     {

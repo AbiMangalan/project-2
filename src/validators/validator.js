@@ -15,7 +15,7 @@ const isValidRequestBody = function (requestBody)
 const isValidURL = function (link)
 {
     return (/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(link));
-}
+};
 
 const isValidMobileNo = function (mobile)
 {
