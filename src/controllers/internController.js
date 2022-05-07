@@ -18,18 +18,6 @@ const createIntern = async function(req, res)
         
         if (!validators.isValidField(requestBody.email)) 
         
-            return res.status(400).send({ status: false, message: "Email is required." });
-        
-        if (!validators.isValidField(requestBody.mobile)) 
-        
-            return res.status(400).send({ status: false, message: "Mobile Number is required." });
-        
-        if(!validators.isValidMobileNo(requestBody.mobile))
-
-            return res.status(400).send({ status: false, message: "Please enter a valid mobile number." });
-        
-        if (!validators.isValidField(requestBody.email)) 
-        
             return res.status(400).send({ status: false, message: "Email id is required." });
         
         if (!validators.isValidEmail(requestBody.email)) 
@@ -40,14 +28,14 @@ const createIntern = async function(req, res)
         if(emailExists)
     
             return res.status(400).send({status : false, message : "Email has already been registered."});
-
-        if (!validators.isValidField(requestBody.collegeName)) 
         
-            return res.status(400).send({ status: false, message: "collegeName is Required." });
+        if (!validators.isValidField(requestBody.mobile)) 
         
-        if(req.body.isDeleted!=undefined)
+            return res.status(400).send({ status: false, message: "Mobile Number is required." });
+        
+        if(!validators.isValidMobileNo(requestBody.mobile))
 
-            return res.status(400).send({status : false, message : "Invalid field (isDeleted) in request body."});
+            return res.status(400).send({ status: false, message: "Please enter a valid mobile number." });
 
         let temp = requestBody.mobile;
         requestBody.mobile = temp.slice(-10);
@@ -55,6 +43,14 @@ const createIntern = async function(req, res)
         if(mobileExists)
     
             return res.status(400).send({status : false, message : "Mobile number has already been registered."});
+            
+        if (!validators.isValidField(requestBody.collegeName)) 
+        
+            return res.status(400).send({ status: false, message: "collegeName is Required." });
+        
+        if(req.body.isDeleted!=undefined)
+
+            return res.status(400).send({status : false, message : "Invalid field (isDeleted) in request body."});
         
         let college = await collegeModel.findOne({ name: requestBody.collegeName, isDeleted : false },{ _id: 1 });
         if (college == null) 
