@@ -36,6 +36,11 @@ const createIntern = async function(req, res)
         
             return res.status(400).send({ status: false, message: "Enter Valid email Id." });
 
+        let emailExists = await internModel.findOne({ email : requestBody.email });
+        if(emailExists)
+    
+            return res.status(400).send({status : false, message : "Email has already been registered."});
+
         if (!validators.isValidField(requestBody.collegeName)) 
         
             return res.status(400).send({ status: false, message: "collegeName is Required." });
@@ -46,10 +51,10 @@ const createIntern = async function(req, res)
 
         let temp = requestBody.mobile;
         requestBody.mobile = temp.slice(-10);
-        let emailAndMobileExists = await internModel.findOne({ $or : [{ mobile : requestBody.mobile },{ email : requestBody.email }] });
-        if(emailAndMobileExists)
+        let mobileExists = await internModel.findOne({ mobile : requestBody.mobile });
+        if(mobileExists)
     
-            return res.status(400).send({status : false, message : "Email id or mobile number has already been registered."});
+            return res.status(400).send({status : false, message : "Mobile number has already been registered."});
         
         let college = await collegeModel.findOne({ name: requestBody.collegeName, isDeleted : false },{ _id: 1 });
         if (college == null) 

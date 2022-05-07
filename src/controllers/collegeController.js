@@ -16,7 +16,7 @@ const createCollege = async function(req,res)
             return res.status(400).send({status : false, message : "Name is required."});
 
         let college = await collegeModel.findOne({name : collegeData.name});
-        if(college!==null)
+        if(college)
 
             return res.status(400).send({status : false, message : "This name is already in use."});
 
@@ -31,6 +31,11 @@ const createCollege = async function(req,res)
         if(!validators.isValidURL(collegeData.logoLink))
 
             return res.status(400).send({status : false, message : "Logo Link is invalid."});
+
+        let linkAlreadyInUse = await collegeModel.findOne({logoLink : collegeData.logoLink});
+        if(linkAlreadyInUse)
+
+            return res.status(400).send({status : false, message : "Logo Link is already in use."});
         
         if(collegeData.isDeleted!=undefined)
 
