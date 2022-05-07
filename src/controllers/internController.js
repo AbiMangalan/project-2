@@ -55,7 +55,7 @@ const createIntern = async function(req, res)
         let college = await collegeModel.findOne({ name: requestBody.collegeName, isDeleted : false },{ _id: 1 });
         if (college == null) 
         
-            return res.status(400).send({ status: false, message: "College not found!" });
+            return res.status(404).send({ status: false, message: "College not found!" });
         
         requestBody['collegeId']=college._id;
         const createIntern = await internModel.create(requestBody);
