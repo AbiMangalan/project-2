@@ -1,9 +1,3 @@
-# Project2-OpenToIntern Group 11
-
-Team Members - Abi Mangalan and Bolendra Moran.
-
--------Project requirements from FunctionUp repo------
-
 # Uranium
 
 ## Open to Intern Project Requirement
